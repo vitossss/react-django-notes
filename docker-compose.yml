@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=default
+    networks:
+      - mynetwork
+  backend:
+    build: ./backend
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    volumes:
+      - ./backend:/note/backend
+    networks:
+      - mynetwork
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    stdin_open: true
+    tty: true
+    command: bash -c "yarn start"
+    volumes:
+      - ./frontend:/note/frontend
+      - node-modules:/note/frontend/node_modules
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+volumes:
+  node-modules:
+  postgres_data:
+networks:
+  mynetwork:

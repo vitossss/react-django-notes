@@ -1,0 +1,84 @@
+.wrapper__list {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.note {
+    width: 100%;
+    padding: 7px 25px;
+    font-size: 1.1rem;
+    transition: background-color .1s ease-in;
+    position: relative;
+}
+.note:hover {
+    background-color: #7e7e7e;
+}
+
+.note::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+    height: 1px;
+    background-color: #7e7e7e;
+}
+
+.note:last-child::after {
+    width: 0;
+    height: 0;
+}
+
+.note:first-child {
+    border-radius: 10px 10px 0 0;
+}
+.note:first-child:hover {
+    background-color: #7e7e7e;
+}
+
+.note:last-child {
+    border-radius: 0 0 10px 10px;
+}
+.note:last-child:hover {
+    background-color: #7e7e7e;
+}
+
+.note a {
+    font-weight: 600;
+    padding-top: 7px;
+}
+
+.notes__list {
+    background-color: #404040;
+    border-radius: 10px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.btn__add {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #30d971;
+}
+
+.btn__add img {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.date__format {
+    height: 20px;
+}
+
+.date__format span {
+    color: #c3c3c3;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: .9rem;
+}

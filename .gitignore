@@ -1,0 +1,7 @@
+# React
+/frontend/node_modules
+package-lock.json
+
+# Django
+/.idea
+/venv
