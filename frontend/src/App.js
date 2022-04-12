@@ -21,7 +21,7 @@ function App() {
 
   async function getAllNotes() {
     const response = await NoteAPI.getNotes(); // get all notes from db
-    setNotes(response.data);
+    setNotes(response.data.map(note => ({...note, isPinned: false})));
   }
 
   async function createOneNote() {

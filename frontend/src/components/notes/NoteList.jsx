@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import classes from "./styles/NoteList.module.css";
@@ -14,20 +14,34 @@ import { getDate } from "../utils/date";
 import { sortPinned } from "../utils/sort";
 
 const NoteList = ({ notes, setNotes }) => {
-  const [pinNote, setPinNote] = useState({
-    id: null,
-    body: "",
-    update: "",
-    created: "",
-    isPinned: false,
-  });
+  const [pinNote, setPinNote] = useState([]);
 
   return (
     <>
       <Header notes={notes} />
       <div className={classes.wrapper__list}>
         <div className={classes.notes__list}>
-          {notes.map((note) => (
+          {notes.map((note) => note.isPinned ? (
+            <div className={classes.note} key={note.id}>
+              <Link to={"/notes/" + note.id}>
+                <pre>{getTitle(note)}</pre>
+                <div className={classes.date__format}>
+                  <span>{getDate(note)}</span>
+                </div>
+              </Link>
+              <div className={classes.btn__pin_section}>
+                <button
+                  className={classes.btn__pin}
+                  onClick={() => {
+                    setPinNote();
+                  }}
+                >
+                  <img src={thumbtack} alt="thumbtack" />
+                </button>
+              </div>
+            </div>
+          ) : "")}
+          {notes.map((note) => note.isPinned ? "" :(
             <div className={classes.note} key={note.id}>
               <Link to={"/notes/" + note.id}>
                 <pre>{getTitle(note)}</pre>
