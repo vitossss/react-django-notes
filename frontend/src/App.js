@@ -32,7 +32,10 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<NoteList notes={notes} />} />
+        <Route
+          path="/"
+          element={<NoteList notes={notes} setNotes={setNotes} />}
+        />
         <Route
           path="/notes/:id"
           element={

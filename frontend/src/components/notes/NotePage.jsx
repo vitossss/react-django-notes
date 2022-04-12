@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./styles/NotePage.module.css";
-import btnBack from '../../assets/images/arrow-left-green.png'
+import btnBack from "../../assets/images/arrow-left-green.png";
 
 import { NoteAPI } from "../../api/api";
 
@@ -54,7 +54,9 @@ const NotePage = ({ note, setNote, createOneNote, getAllNotes }) => {
     <div className={classes.wrapper}>
       <div className={classes.btn__update_section}>
         <Link onClick={checkUpdate} to="/">
-          <button className={classes.btn__update}><img src={btnBack} alt="btnBack" /></button>
+          <button className={classes.btn__update}>
+            <img src={btnBack} alt="btnBack" />
+          </button>
         </Link>
       </div>
       <textarea

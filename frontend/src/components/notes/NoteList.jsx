@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 import classes from "./styles/NoteList.module.css";
 import Header from "../header/Header";
@@ -6,19 +7,20 @@ import Header from "../header/Header";
 import { Link } from "react-router-dom";
 
 import addNote from "../../assets/images/add-note.svg";
+import thumbtack from "../../assets/images/thumbtack-solid-white.png";
 
-const NoteList = ({ notes }) => {
-  const getTitle = (note) => {
-    const title = note.body.split('\n')[0]
-    if (title.length > 45) {
-      return title.slice(0, 45)
-    }
-    return title
-  };
+import { getTitle } from "../utils/title";
+import { getDate } from "../utils/date";
+import { sortPinned } from "../utils/sort";
 
-  const getDate = (note) => {
-    return new Date(note.update).toLocaleDateString()
-  }
+const NoteList = ({ notes, setNotes }) => {
+  const [pinNote, setPinNote] = useState({
+    id: null,
+    body: "",
+    update: "",
+    created: "",
+    isPinned: false,
+  });
 
   return (
     <>
@@ -29,8 +31,20 @@ const NoteList = ({ notes }) => {
             <div className={classes.note} key={note.id}>
               <Link to={"/notes/" + note.id}>
                 <pre>{getTitle(note)}</pre>
-                <div className={classes.date__format}><span>{getDate(note)}</span></div>
+                <div className={classes.date__format}>
+                  <span>{getDate(note)}</span>
+                </div>
               </Link>
+              <div className={classes.btn__pin_section}>
+                <button
+                  className={classes.btn__pin}
+                  onClick={() => {
+                    setPinNote();
+                  }}
+                >
+                  <img src={thumbtack} alt="thumbtack" />
+                </button>
+              </div>
             </div>
           ))}
         </div>

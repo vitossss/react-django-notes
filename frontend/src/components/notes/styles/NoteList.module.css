@@ -6,16 +6,23 @@
 
 .note {
     width: 100%;
-    padding: 7px 25px;
     font-size: 1.1rem;
+    padding: 0 0 10px 25px;
     transition: background-color .1s ease-in;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .note:hover {
     background-color: #7e7e7e;
 }
 
-.note::after {
+.note:hover .btn__pin_section {
+    display: block;
+}
+
+/* .note::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -27,7 +34,7 @@
 .note:last-child::after {
     width: 0;
     height: 0;
-}
+} */
 
 .note:first-child {
     border-radius: 10px 10px 0 0;
@@ -44,14 +51,15 @@
 }
 
 .note a {
-    font-weight: 600;
+    width: 92%;
+    font-weight: 500;
     padding-top: 7px;
 }
 
 .notes__list {
     background-color: #404040;
     border-radius: 10px;
-    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
 }
 
 .btn__add {
@@ -78,7 +86,24 @@
 
 .date__format span {
     color: #c3c3c3;
-    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     font-weight: 400;
     font-size: .9rem;
+}
+
+.btn__pin_section {
+    margin-right: 25px;
+    display: none;
+}
+
+.btn__pin {
+    width: 20px;
+    height: 25px;
+    border: none;
+    background-color: transparent;
+}
+
+.btn__pin img {
+    width: 12px;
+    height: 15px;
 }

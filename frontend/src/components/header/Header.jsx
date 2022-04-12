@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from './header.module.css'
+import classes from "./header.module.css";
 
 const Header = ({ notes }) => {
   return (
@@ -9,7 +9,9 @@ const Header = ({ notes }) => {
         <div className={classes.notes__header}>
           <h2>Notes</h2>
         </div>
-        <div className={classes.notes__counter}><span>{notes.length}</span></div>
+        <div className={classes.notes__counter}>
+          <span>{notes.length}</span>
+        </div>
       </header>
     </div>
   );
