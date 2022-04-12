@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import classes from "./styles/NoteList.module.css";
 import Header from "../header/Header";
@@ -13,20 +13,26 @@ import { getTitle } from "../utils/title";
 import { getDate } from "../utils/date";
 import { sortPinned } from "../utils/sort";
 
-const NoteList = ({ notes, setNotes }) => {
-  const [pinNote, setPinNote] = useState({
-    id: null,
-    body: "",
-    update: "",
-    created: "",
-    isPinned: false,
-  });
+const NoteList = ({ notes }) => {
+  const [pinNote, setPinNote] = useState([]);
 
   return (
     <>
       <Header notes={notes} />
       <div className={classes.wrapper__list}>
         <div className={classes.notes__list}>
+          {pinNote
+            ? pinNote.map((pinn) => (
+                <div className={classes.note} key={pinn.id}>
+                  <Link to={"/notes/" + pinn.id}>
+                    <pre>{getTitle(pinn)}</pre>
+                    <div className={classes.date__format}>
+                      <span>{getDate(pinn)}</span>
+                    </div>
+                  </Link>
+                </div>
+              ))
+            : null}
           {notes.map((note) => (
             <div className={classes.note} key={note.id}>
               <Link to={"/notes/" + note.id}>
@@ -39,7 +45,7 @@ const NoteList = ({ notes, setNotes }) => {
                 <button
                   className={classes.btn__pin}
                   onClick={() => {
-                    setPinNote();
+                    setPinNote(note);
                   }}
                 >
                   <img src={thumbtack} alt="thumbtack" />

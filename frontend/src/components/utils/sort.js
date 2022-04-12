@@ -1,3 +1,1 @@
-export const sortPinned = (pinNote) => {
-  
-}
+export const sortPinned = () => {};
