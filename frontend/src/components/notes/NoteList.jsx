@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 
 import classes from "./styles/NoteList.module.css";
 import Header from "../header/Header";
@@ -21,38 +21,54 @@ const NoteList = ({ notes }) => {
       <Header notes={notes} />
       <div className={classes.wrapper__list}>
         <div className={classes.notes__list}>
-          {pinNote
-            ? pinNote.map((pinn) => (
-                <div className={classes.note} key={pinn.id}>
-                  <Link to={"/notes/" + pinn.id}>
-                    <pre>{getTitle(pinn)}</pre>
-                    <div className={classes.date__format}>
-                      <span>{getDate(pinn)}</span>
-                    </div>
-                  </Link>
+          {notes.map((note) =>
+            note.isPinned ? (
+              <div className={classes.note} key={note.id}>
+                <Link to={"/notes/" + note.id}>
+                  <pre>{getTitle(note)}</pre>
+                  <div className={classes.date__format}>
+                    <span>{getDate(note)}</span>
+                  </div>
+                </Link>
+                <div className={classes.btn__pin_section}>
+                  <button
+                    className={classes.btn__pin}
+                    onClick={() => {
+                      setPinNote();
+                    }}
+                  >
+                    <img src={thumbtack} alt="thumbtack" />
+                  </button>
                 </div>
-              ))
-            : null}
-          {notes.map((note) => (
-            <div className={classes.note} key={note.id}>
-              <Link to={"/notes/" + note.id}>
-                <pre>{getTitle(note)}</pre>
-                <div className={classes.date__format}>
-                  <span>{getDate(note)}</span>
-                </div>
-              </Link>
-              <div className={classes.btn__pin_section}>
-                <button
-                  className={classes.btn__pin}
-                  onClick={() => {
-                    setPinNote(note);
-                  }}
-                >
-                  <img src={thumbtack} alt="thumbtack" />
-                </button>
               </div>
-            </div>
-          ))}
+            ) : (
+              ""
+            )
+          )}
+          {notes.map((note) =>
+            note.isPinned ? (
+              ""
+            ) : (
+              <div className={classes.note} key={note.id}>
+                <Link to={"/notes/" + note.id}>
+                  <pre>{getTitle(note)}</pre>
+                  <div className={classes.date__format}>
+                    <span>{getDate(note)}</span>
+                  </div>
+                </Link>
+                <div className={classes.btn__pin_section}>
+                  <button
+                    className={classes.btn__pin}
+                    onClick={() => {
+                      setPinNote(note);
+                    }}
+                  >
+                    <img src={thumbtack} alt="thumbtack" />
+                  </button>
+                </div>
+              </div>
+            )
+          )}
         </div>
         <div>
           <Link to="/notes/new">
